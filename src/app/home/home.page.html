@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+        <ion-menu-toggle>
+            <ion-button >
+              <ion-icon name="menu"></ion-icon>
+            </ion-button>
+        </ion-menu-toggle>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  
+  <ion-menu side="start" menuId="custom" class="my-custom-menu">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>PadiApp Menu</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-item href="/tickets">Tickets</ion-item>
+        <ion-item href="/troubleshoots">Troubleshoots</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  
+  <ion-router-outlet main></ion-router-outlet>
+</ion-content>
