@@ -5,21 +5,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
+  <ion-list *ngFor="let troubleshoot of troubleshoots">
     <ion-item>
-      <ion-label>Pokémon Yellow</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Mega Man X</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>The Legend of Zelda</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Pac-Man</ion-label>
-    </ion-item>
-    <ion-item>
-      <ion-label>Super Mario World</ion-label>
+      <ion-label>
+        <h5>{{troubleshoot.name}}</h5>
+        <h6>{{troubleshoot.kdticket}}</h6>
+      </ion-label>
+      <ion-select placeholder="Pilih Aksi" interface="popover">
+        <ion-select-option>Follow Up</ion-select-option>
+        <ion-select-option>Entri Ceklist</ion-select-option>
+      </ion-select>
     </ion-item>
   </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
 </ion-content>
