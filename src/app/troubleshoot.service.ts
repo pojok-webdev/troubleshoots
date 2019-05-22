@@ -18,6 +18,8 @@ export class TroubleshootService {
   getslimit(obj,callback){
     this.execAjax(this.appvar.serverport+'troubleshootslimit/'+obj.segment+'/'+obj.offset,callback)
   }
+  getsearch(obj,callback){
+  }
   execAjax(url,callback){
     this.obj = this.http.get<any>(url)
     this.obj.subscribe(

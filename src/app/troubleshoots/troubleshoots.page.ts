@@ -13,6 +13,7 @@ export class TroubleshootsPage implements OnInit {
   troubleshoots
   rowIndex = 0
   rowAmount = 10
+  queryText
   constructor(private troubleshoot:TroubleshootService) {
     this.troubleshoot.getslimit({segment:this.rowIndex,offset:this.rowAmount},res => {
       console.log("Gets",res)
@@ -21,6 +22,11 @@ export class TroubleshootsPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+  searchByKeyword(event){
+    this.troubleshoots.getsearch({clientname:this.queryText,kdticket:this.queryText},res=>{
+      console.log("search result",res)
+    })
   }
   loadData(event) {
     setTimeout(() => {
