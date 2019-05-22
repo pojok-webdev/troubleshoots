@@ -10,10 +10,13 @@ export class TroubleshootService {
   obj : Observable<any>
   constructor(private http: HttpClient, private appvar: AppvarService) {}
   get(obj,callback){
-    this.execAjax(this.appvar.serverport+'troubleshoots/'+obj.id,callback)
+    this.execAjax(this.appvar.serverport+'troubleshoot/'+obj.id,callback)
   }
   gets(callback){
     this.execAjax(this.appvar.serverport+'troubleshoots',callback)
+  }
+  getslimit(obj,callback){
+    this.execAjax(this.appvar.serverport+'troubleshootslimit/'+obj.segment+'/'+obj.offset,callback)
   }
   execAjax(url,callback){
     this.obj = this.http.get<any>(url)

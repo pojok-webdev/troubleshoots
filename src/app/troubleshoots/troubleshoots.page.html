@@ -4,21 +4,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list *ngFor="let troubleshoot of troubleshoots">
+<ion-content>             
+  <ion-card *ngFor="let troubleshoot of troubleshoots">
     <ion-item>
-      <ion-label>
-        <h5>{{troubleshoot.name}}</h5>
-        <h6>{{troubleshoot.kdticket}}</h6>
-      </ion-label>
-      <ion-select placeholder="Pilih Aksi" interface="popover">
-        <ion-select-option>Follow Up</ion-select-option>
-        <ion-select-option>Entri Ceklist</ion-select-option>
-      </ion-select>
+      <h2 text-capitalize>{{ troubleshoot.kdticket }}</h2>
     </ion-item>
-  </ion-list>
-
-  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-card-content>
+      {{ troubleshoot.name }}
+    </ion-card-content>
+  </ion-card>
+ 
+ 
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
     <ion-infinite-scroll-content
       loadingSpinner="bubbles"
       loadingText="Loading more data...">
