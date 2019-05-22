@@ -19,6 +19,9 @@ export class TroubleshootService {
     this.execAjax(this.appvar.serverport+'troubleshootslimit/'+obj.segment+'/'+obj.offset,callback)
   }
   getsearch(obj,callback){
+    this.postAjax(this.appvar.serverport+'troubleshootsearch',obj,result => {
+      callback(result)
+    })
   }
   execAjax(url,callback){
     this.obj = this.http.get<any>(url)
@@ -31,5 +34,15 @@ export class TroubleshootService {
       }
     )
   }
-
+  postAjax(url,obj,callback){
+    this.obj = this.http.post<any>(url,obj)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
+  }
 }
