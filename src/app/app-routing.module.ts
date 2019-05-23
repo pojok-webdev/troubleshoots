@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'tickets', loadChildren: './tickets/tickets.module#TicketsPageModule' },
   { path: 'troubleshoots', loadChildren: './troubleshoots/troubleshoots.module#TroubleshootsPageModule' },
+  { path: 'troubleshoot-checklists/:id', loadChildren: './troubleshoot-checklists/troubleshoot-checklists.module#TroubleshootChecklistsPageModule' },
 ];
 
 @NgModule({

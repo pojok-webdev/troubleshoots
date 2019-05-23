@@ -1,30 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>
-        <ion-menu-toggle>
-            <ion-button >
-              <ion-icon name="menu"></ion-icon>
-            </ion-button>
-        </ion-menu-toggle>
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
+    <ion-toolbar>
+      <ion-title>troubleshoots</ion-title>
+      <ion-buttons slot="start">
+        <ion-button><ion-icon name="menu"></ion-icon></ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   
-  <ion-menu side="start" menuId="custom" class="my-custom-menu">
-    <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>PadiApp Menu</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-item href="/tickets">Tickets</ion-item>
-        <ion-item href="/troubleshoots">Troubleshoots</ion-item>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
+  <ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="goTop()">
+        <ion-icon name="arrow-round-up"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <ion-searchbar [(ngModel)]="queryText" placeholder="Nama atau kode ticket" (search)="searchByKeyword($event)"></ion-searchbar>
   
-  <ion-router-outlet main></ion-router-outlet>
-</ion-content>
+    <ion-card *ngFor="let troubleshoot of troubleshoots">
+      <ion-item>
+        <h2 text-capitalize>{{ troubleshoot.kdticket }}</h2>
+      </ion-item>
+      <ion-card-content>
+        <ion-list>
+          <ion-item>
+              {{ troubleshoot.name }}
+          </ion-item>
+          <ion-item>
+              <ion-button (click)="showChecklist(troubleshoot)">Checklist</ion-button>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+   
+   
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  
+  </ion-content>
+  

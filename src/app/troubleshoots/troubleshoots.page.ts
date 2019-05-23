@@ -1,6 +1,6 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TroubleshootService } from '../troubleshoot.service';
-import { IonInfiniteScroll,IonVirtualScroll } from '@ionic/angular';
+import { IonInfiniteScroll, IonVirtualScroll, IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-troubleshoots',
@@ -10,6 +10,7 @@ import { IonInfiniteScroll,IonVirtualScroll } from '@ionic/angular';
 export class TroubleshootsPage implements OnInit {
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild(IonVirtualScroll) virtualScroll: IonVirtualScroll;
+  @ViewChild(IonContent) content: IonContent;
   troubleshoots
   rowIndex = 0
   rowAmount = 10
@@ -24,8 +25,9 @@ export class TroubleshootsPage implements OnInit {
   ngOnInit() {
   }
   searchByKeyword(event){
-    this.troubleshoots.getsearch({clientname:this.queryText,kdticket:this.queryText},res=>{
+    this.troubleshoot.getsearch({clientname:this.queryText,kdticket:this.queryText,segment:0,offset:100},res=>{
       console.log("search result",res)
+      this.troubleshoots = res
     })
   }
   loadData(event) {
@@ -75,4 +77,12 @@ export class TroubleshootsPage implements OnInit {
   toggleInfiniteScroll() {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
+  showChecklist(obj){
+    window.location.href = "/troubleshoot-checklists/"+obj.id
+  }
+  goTop(){
+    console.log("should be go to top")
+    this.content.scrollToTop()
+  }
+
 }
