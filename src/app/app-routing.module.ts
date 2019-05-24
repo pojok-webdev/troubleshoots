@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: 'tickets', loadChildren: './tickets/tickets.module#TicketsPageModule' },
   { path: 'troubleshoots', loadChildren: './troubleshoots/troubleshoots.module#TroubleshootsPageModule' },
   { path: 'troubleshoot-checklists/:id', loadChildren: './troubleshoot-checklists/troubleshoot-checklists.module#TroubleshootChecklistsPageModule' },
+  { path: 'troubleshootcheckliststable/:id', loadChildren: './troubleshootcheckliststable/troubleshootcheckliststable.module#TroubleshootcheckliststablePageModule' },
 ];
 
 @NgModule({

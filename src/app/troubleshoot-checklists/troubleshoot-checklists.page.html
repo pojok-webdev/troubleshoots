@@ -1,9 +1,33 @@
 <ion-content>
-  <ion-list>
-    <ion-item>
-      <ion-checkbox></ion-checkbox>
-      <ion-checkbox></ion-checkbox>
-      <ion-label>Diskusi mengenai topologi/perangkat yang disarankan</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-fab vertical="center" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="goToTop()">
+      <ion-icon name="arrow-round-up"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-card *ngFor="let obj of troubleshootchecklistmaster">
+    <ion-card-header>
+        <ion-label color="primary">{{obj.category}}</ion-label>
+    </ion-card-header>
+    <ion-card-content>
+        <ion-item>
+            <ion-label text-wrap>
+                {{ obj.id }}. {{ obj.name }}
+            </ion-label>
+            <ion-button shape="round" slot="end">
+              <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-input placeholder="Target"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-input placeholder="Hasil"></ion-input>  
+          </ion-item>
+          <ion-item>
+            <ion-textarea placeholder="Keterangan"></ion-textarea>
+          </ion-item>      
+    </ion-card-content>
+  </ion-card>
 </ion-content>

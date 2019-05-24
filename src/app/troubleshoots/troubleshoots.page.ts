@@ -78,7 +78,7 @@ export class TroubleshootsPage implements OnInit {
     this.infiniteScroll.disabled = !this.infiniteScroll.disabled;
   }
   showChecklist(obj){
-    window.location.href = "/troubleshoot-checklists/"+obj.id
+    window.location.href = "/troubleshootcheckliststable/"+obj.id
   }
   goTop(){
     console.log("should be go to top")
