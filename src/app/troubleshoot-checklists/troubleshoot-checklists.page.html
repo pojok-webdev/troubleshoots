@@ -1,10 +1,22 @@
 <ion-content>
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="saveCheckList(checklist)">
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-fab vertical="center" horizontal="end" slot="fixed">
     <ion-fab-button (click)="goToTop()">
       <ion-icon name="arrow-round-up"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-card *ngFor="let obj of troubleshootchecklistmaster">
+  <ion-card>
+    <ion-card-header>
+      <ion-input [(ngModel)]="checklist.problemType" placeholder="Jenis Problem"></ion-input>
+      <ion-input [(ngModel)]="checklist.deviceBrought" placeholder="Perangkat yang dibawa"></ion-input>
+      <ion-input [(ngModel)]="checklist.deviceUsed" placeholder="Perangkat yang terpakai"></ion-input>
+    </ion-card-header>
+  </ion-card>
+  <ion-card *ngFor="let obj of checklist.troubleshootchecklistmaster">
     <ion-card-header>
         <ion-label color="primary">{{obj.category}}</ion-label>
     </ion-card-header>
@@ -13,20 +25,21 @@
             <ion-label text-wrap>
                 {{ obj.id }}. {{ obj.name }}
             </ion-label>
-            <ion-button shape="round" slot="end">
-              <ion-icon name="checkmark"></ion-icon>
-            </ion-button>
           </ion-item>
           <ion-item>
             <ion-checkbox slot="start"></ion-checkbox>
-            <ion-input placeholder="Target"></ion-input>
+            <ion-input [(ngModel)]="obj.planning" placeholder="Planning"></ion-input>
           </ion-item>
           <ion-item>
             <ion-checkbox slot="start"></ion-checkbox>
-            <ion-input placeholder="Hasil"></ion-input>  
+            <ion-input [(ngModel)]="obj.hasil" placeholder="Hasil"></ion-input>  
           </ion-item>
           <ion-item>
-            <ion-textarea placeholder="Keterangan"></ion-textarea>
+            <ion-checkbox slot="start"></ion-checkbox>
+            <ion-input [(ngModel)]="obj.target" placeholder="Target (Menit)"></ion-input>  
+          </ion-item>
+          <ion-item>
+            <ion-textarea [(ngModel)]="obj.description" placeholder="Keterangan"></ion-textarea>
           </ion-item>      
     </ion-card-content>
   </ion-card>

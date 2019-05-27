@@ -11,7 +11,9 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TroubleshootChecklistsPage implements OnInit {
 @ViewChild(IonContent) content: IonContent
-  troubleshootchecklistmaster
+  checklist = {
+    problemType:'',deviceBrought:'',deviceUsed:'',troubleshootchecklistmaster:[]
+  }
   obj
   constructor(
     private checklistmaster: TroubleshootChecklistsService,
@@ -22,7 +24,10 @@ export class TroubleshootChecklistsPage implements OnInit {
       console.log("Troubelshoot",res)
       this.obj = res[0]
       this.checklistmaster.getTroubleshootChecklistMaster(res => {
-        this.troubleshootchecklistmaster = res
+        this.checklist.troubleshootchecklistmaster = res
+        this.checklist.troubleshootchecklistmaster.push(
+          {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',hasil:'',description:''}
+        )
       })
     })
   }
@@ -31,5 +36,8 @@ export class TroubleshootChecklistsPage implements OnInit {
   }
   goToTop(){
     this.content.scrollToTop()
+  }
+  saveCheckList(objs){
+    console.log("Objs",objs)
   }
 }

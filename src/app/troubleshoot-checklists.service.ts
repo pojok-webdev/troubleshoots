@@ -20,4 +20,16 @@ export class TroubleshootChecklistsService {
       }
     )
   }
+  troubleshootchecklistsgetbytroubleshoot(obj,callback){
+    this.obj = this.http.get(this.appvar.serverport+'troubleshootchecklistsgetbytroubleshoot/'+obj.troubleshoot_id)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )    
+  }
+    
 }
