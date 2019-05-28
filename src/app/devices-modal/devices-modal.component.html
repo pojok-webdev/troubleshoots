@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-searchbar [(ngModel)]="searchtext" (ionChange)="filterItem(searchtext)"></ion-searchbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngFor="let device of devices">
+    <ion-item>
+      <ion-label>{{device}}</ion-label>
+      <ion-button slot="end" (click)="chooseDevice(device)"><ion-icon name="checkmark"></ion-icon></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

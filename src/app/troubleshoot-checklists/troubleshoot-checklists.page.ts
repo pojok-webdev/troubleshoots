@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TroubleshootChecklistsService } from '../troubleshoot-checklists.service';
-import { IonContent } from '@ionic/angular';
+import { IonContent, ModalController } from '@ionic/angular';
 import { TroubleshootService } from '../troubleshoot.service';
 import { ActivatedRoute } from '@angular/router';
+import { DevicesModalComponent } from '../devices-modal/devices-modal.component';
 
 @Component({
   selector: 'app-troubleshoot-checklists',
@@ -21,7 +22,8 @@ export class TroubleshootChecklistsPage implements OnInit {
     private checklistmaster: TroubleshootChecklistsService,
     private troubleshoot: TroubleshootService,
     private checklistservice: TroubleshootChecklistsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalController: ModalController
   ) {
     this.troubleshoot.get({id:this.route.snapshot.params.id},res=>{
       console.log("Troubelshoot",res)
@@ -47,6 +49,18 @@ export class TroubleshootChecklistsPage implements OnInit {
     this.checklistservice.save(objs,result=>{
       console.log("Result",result)
     })
+  }
+  getDevices(obj){}
+  async addDevice(){
+    const modal = await this.modalController.create({
+      component:DevicesModalComponent,
+      componentProps:{}
+    })
+    modal.onDidDismiss().then((obj:any)=>{
+      console.log("OBJ got",obj)
+      this.devicesBrought.push(obj.data)
+    })
+    return await modal.present()
   }
   removeDevice(chip){
     chip.remove()

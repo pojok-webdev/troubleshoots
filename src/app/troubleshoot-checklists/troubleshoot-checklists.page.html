@@ -28,7 +28,7 @@
             <ion-label>{{device}}</ion-label>
             <ion-icon (click)="remove(devicesBrought,i)" name="close-circle"></ion-icon>
           </ion-chip>
-            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+            <ion-button  slot="end" (click)="addDevice()"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
         <ion-item>
           <ion-chip *ngFor="let device of devicesUsed;let i=index;">
