@@ -9,7 +9,7 @@ import { AppvarService } from './appvar.service';
 export class TroubleshootChecklistsService {
   obj: Observable<any>
   constructor(private http: HttpClient,private appvar:AppvarService) { }
-  getTroubleshootChecklistMaster(callback){
+  getMaster(callback){
     this.obj = this.http.get(this.appvar.serverport+'troubleshootchecklistmaster')
     this.obj.subscribe(
       data => {
@@ -20,7 +20,7 @@ export class TroubleshootChecklistsService {
       }
     )
   }
-  troubleshootchecklistsgetbytroubleshoot(obj,callback){
+  getList(obj,callback){
     this.obj = this.http.get(this.appvar.serverport+'troubleshootchecklistsgetbytroubleshoot/'+obj.troubleshoot_id)
     this.obj.subscribe(
       data => {
@@ -31,5 +31,15 @@ export class TroubleshootChecklistsService {
       }
     )    
   }
-    
+  save(obj,callback){
+    this.obj = this.http.post(this.appvar.serverport+'troubleshootchecklistsave',obj)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
+  }
 }

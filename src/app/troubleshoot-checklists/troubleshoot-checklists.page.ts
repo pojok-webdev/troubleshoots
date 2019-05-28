@@ -15,15 +15,18 @@ export class TroubleshootChecklistsPage implements OnInit {
     problemType:'',deviceBrought:'',deviceUsed:'',troubleshootchecklistmaster:[]
   }
   obj
+  devicesUsed = ["router","switch"]
+  devicesBrought = ["router","switch"]
   constructor(
     private checklistmaster: TroubleshootChecklistsService,
     private troubleshoot: TroubleshootService,
+    private checklistservice: TroubleshootChecklistsService,
     private route: ActivatedRoute
   ) {
     this.troubleshoot.get({id:this.route.snapshot.params.id},res=>{
       console.log("Troubelshoot",res)
       this.obj = res[0]
-      this.checklistmaster.getTroubleshootChecklistMaster(res => {
+      this.checklistmaster.getMaster(res => {
         this.checklist.troubleshootchecklistmaster = res
         this.checklist.troubleshootchecklistmaster.push(
           {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',hasil:'',description:''}
@@ -39,5 +42,17 @@ export class TroubleshootChecklistsPage implements OnInit {
   }
   saveCheckList(objs){
     console.log("Objs",objs)
+    objs.createuser = "puji"
+    objs.troubleshoot_id = this.route.snapshot.params.id
+    this.checklistservice.save(objs,result=>{
+      console.log("Result",result)
+    })
+  }
+  removeDevice(chip){
+    chip.remove()
+  }
+  remove(el,i){
+    el.splice(i,1)
+    console.log("removed bro")
   }
 }

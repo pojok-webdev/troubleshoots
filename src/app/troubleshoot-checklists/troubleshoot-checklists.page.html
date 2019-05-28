@@ -11,9 +11,39 @@
   </ion-fab>
   <ion-card>
     <ion-card-header>
-      <ion-input [(ngModel)]="checklist.problemType" placeholder="Jenis Problem"></ion-input>
-      <ion-input [(ngModel)]="checklist.deviceBrought" placeholder="Perangkat yang dibawa"></ion-input>
-      <ion-input [(ngModel)]="checklist.deviceUsed" placeholder="Perangkat yang terpakai"></ion-input>
+      <ion-list>
+        <ion-item>
+            <ion-datetime [(ngModel)]="checklist.troubleshootdate" placeholder="Tanggal troubleshoot" display-format="YYYY-MM-DD"></ion-datetime>
+        </ion-item>
+        <ion-item>
+            <ion-input [(ngModel)]="checklist.implementer" placeholder="Pelaksana"></ion-input>
+            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+        </ion-item>
+        <ion-item>
+            <ion-input [(ngModel)]="checklist.problemtype" placeholder="Jenis Problem"></ion-input>
+            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-chip *ngFor="let device of devicesBrought;let i=index;">
+            <ion-label>{{device}}</ion-label>
+            <ion-icon (click)="remove(devicesBrought,i)" name="close-circle"></ion-icon>
+          </ion-chip>
+            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+        </ion-item>
+        <ion-item>
+          <ion-chip *ngFor="let device of devicesUsed;let i=index;">
+            <ion-label>{{device}}</ion-label>
+            <ion-icon (click)="remove(devicesUsed,i)" name="close-circle"></ion-icon>
+          </ion-chip>
+            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+        </ion-item>
+      </ion-list>
+      
+      
+      
+      
+      
+      
     </ion-card-header>
   </ion-card>
   <ion-card *ngFor="let obj of checklist.troubleshootchecklistmaster">
