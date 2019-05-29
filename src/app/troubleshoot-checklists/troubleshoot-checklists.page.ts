@@ -4,6 +4,7 @@ import { IonContent, ModalController } from '@ionic/angular';
 import { TroubleshootService } from '../troubleshoot.service';
 import { ActivatedRoute } from '@angular/router';
 import { DevicesModalComponent } from '../devices-modal/devices-modal.component';
+import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'app-troubleshoot-checklists',
@@ -13,17 +14,17 @@ import { DevicesModalComponent } from '../devices-modal/devices-modal.component'
 export class TroubleshootChecklistsPage implements OnInit {
 @ViewChild(IonContent) content: IonContent
   checklist = {
-    problemType:'',deviceBrought:'',deviceUsed:'',troubleshootchecklistmaster:[]
+    problemType:'',devicesBrought:[],devicesUsed:[],troubleshootchecklistmaster:[]
   }
   obj
-  devicesUsed = ["router","switch"]
-  devicesBrought = ["router","switch"]
+  devices
   constructor(
     private checklistmaster: TroubleshootChecklistsService,
     private troubleshoot: TroubleshootService,
     private checklistservice: TroubleshootChecklistsService,
     private route: ActivatedRoute,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private device: DeviceService
   ) {
     this.troubleshoot.get({id:this.route.snapshot.params.id},res=>{
       console.log("Troubelshoot",res)
@@ -34,6 +35,13 @@ export class TroubleshootChecklistsPage implements OnInit {
           {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',hasil:'',description:''}
         )
       })
+      this.device.gets(devices=>{
+        this.devices = devices
+/*        console.log("Devicees",devices)
+        this.filteredDevices = this.filterItem('')
+        */
+      })
+  
     })
   }
 
@@ -54,13 +62,29 @@ export class TroubleshootChecklistsPage implements OnInit {
   async addDevice(){
     const modal = await this.modalController.create({
       component:DevicesModalComponent,
-      componentProps:{}
+      componentProps:{
+        devices:this.devices
+      }
     })
     modal.onDidDismiss().then((obj:any)=>{
       console.log("OBJ got",obj)
-      this.devicesBrought.push(obj.data)
+      this.checklist.devicesBrought.push(obj.data)
     })
     return await modal.present()
+  }
+  async addUsedDevice(){
+    const modal = await this.modalController.create({
+      component:DevicesModalComponent,
+      componentProps:{
+        devices:this.checklist.devicesBrought
+      }
+    })
+    modal.onDidDismiss().then((obj:any)=>{
+      console.log("OBJ got",obj)
+      this.checklist.devicesUsed.push(obj.data)
+    })
+    return await modal.present()
+
   }
   removeDevice(chip){
     chip.remove()

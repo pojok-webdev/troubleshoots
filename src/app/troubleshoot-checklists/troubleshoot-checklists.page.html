@@ -24,18 +24,20 @@
             <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
         <ion-item>
-          <ion-chip *ngFor="let device of devicesBrought;let i=index;">
-            <ion-label>{{device}}</ion-label>
-            <ion-icon (click)="remove(devicesBrought,i)" name="close-circle"></ion-icon>
+          <ion-label>Perangkat dibawa</ion-label>
+          <ion-chip *ngFor="let device of checklist.devicesBrought;let i=index;">
+            <ion-label>{{device.name}}</ion-label>
+            <ion-icon (click)="remove(checklist.devicesBrought,i)" name="close-circle"></ion-icon>
           </ion-chip>
             <ion-button  slot="end" (click)="addDevice()"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
         <ion-item>
-          <ion-chip *ngFor="let device of devicesUsed;let i=index;">
-            <ion-label>{{device}}</ion-label>
-            <ion-icon (click)="remove(devicesUsed,i)" name="close-circle"></ion-icon>
+          <ion-label>Perangkat terpakai</ion-label>
+          <ion-chip *ngFor="let device of checklist.devicesUsed;let i=index;">
+            <ion-label>{{device.name}}</ion-label>
+            <ion-icon (click)="remove(checklist.devicesUsed,i)" name="close-circle"></ion-icon>
           </ion-chip>
-            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+            <ion-button  slot="end" (click)="addUsedDevice()"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
       </ion-list>
       
