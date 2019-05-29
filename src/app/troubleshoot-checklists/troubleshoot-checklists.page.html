@@ -16,12 +16,17 @@
             <ion-datetime [(ngModel)]="checklist.troubleshootdate" placeholder="Tanggal troubleshoot" display-format="YYYY-MM-DD"></ion-datetime>
         </ion-item>
         <ion-item>
-            <ion-input [(ngModel)]="checklist.implementer" placeholder="Pelaksana"></ion-input>
-            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+          <ion-label>Pelaksana</ion-label>
+          <ion-chip *ngFor="let user of checklist.users;let i=index;">
+            <ion-label>{{user.username}}</ion-label>
+            <ion-icon (click)="remove(checklist.users,i)" name="close-circle"></ion-icon>
+          </ion-chip>
+          <ion-button  slot="end" (click)="addImplementer()"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
         <ion-item>
-            <ion-input [(ngModel)]="checklist.problemtype" placeholder="Jenis Problem"></ion-input>
-            <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+          <ion-label>Jenis Masalah</ion-label>
+          <ion-input [(ngModel)]="checklist.problemtype" placeholder="Jenis Problem"></ion-input>
+          <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
         <ion-item>
           <ion-label>Perangkat dibawa</ion-label>

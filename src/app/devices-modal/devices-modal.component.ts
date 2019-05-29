@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
-import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'app-devices-modal',
@@ -18,9 +17,7 @@ filteredDevices = []
 
   ngOnInit() {}
   filterItem(searchItem){
-    console.log("searchItem",searchItem)
     return this.devices.filter(device => {
-      console.log("device",device)
       return device.name.toLowerCase().indexOf(searchItem.toLowerCase())>-1
     })
   }

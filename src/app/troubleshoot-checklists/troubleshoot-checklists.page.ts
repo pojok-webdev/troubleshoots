@@ -5,6 +5,8 @@ import { TroubleshootService } from '../troubleshoot.service';
 import { ActivatedRoute } from '@angular/router';
 import { DevicesModalComponent } from '../devices-modal/devices-modal.component';
 import { DeviceService } from '../device.service';
+import { ImplementerModalComponent } from '../implementer-modal/implementer-modal.component';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-troubleshoot-checklists',
@@ -14,18 +16,21 @@ import { DeviceService } from '../device.service';
 export class TroubleshootChecklistsPage implements OnInit {
 @ViewChild(IonContent) content: IonContent
   checklist = {
-    problemType:'',devicesBrought:[],devicesUsed:[],troubleshootchecklistmaster:[]
+    problemType:'',devicesBrought:[],devicesUsed:[],users:[],troubleshootchecklistmaster:[]
   }
   obj
   devices
+  users
   constructor(
     private checklistmaster: TroubleshootChecklistsService,
     private troubleshoot: TroubleshootService,
     private checklistservice: TroubleshootChecklistsService,
     private route: ActivatedRoute,
     private modalController: ModalController,
-    private device: DeviceService
+    private device: DeviceService,
+    private user: UserService
   ) {
+    let that = this
     this.troubleshoot.get({id:this.route.snapshot.params.id},res=>{
       console.log("Troubelshoot",res)
       this.obj = res[0]
@@ -37,11 +42,10 @@ export class TroubleshootChecklistsPage implements OnInit {
       })
       this.device.gets(devices=>{
         this.devices = devices
-/*        console.log("Devicees",devices)
-        this.filteredDevices = this.filterItem('')
-        */
       })
-  
+      that.user.get(users=>{
+        this.users = users
+      })
     })
   }
 
@@ -68,7 +72,9 @@ export class TroubleshootChecklistsPage implements OnInit {
     })
     modal.onDidDismiss().then((obj:any)=>{
       console.log("OBJ got",obj)
-      this.checklist.devicesBrought.push(obj.data)
+      if(typeof obj.data !=="undefined"){
+        this.checklist.devicesBrought.push(obj.data)
+      }
     })
     return await modal.present()
   }
@@ -81,10 +87,26 @@ export class TroubleshootChecklistsPage implements OnInit {
     })
     modal.onDidDismiss().then((obj:any)=>{
       console.log("OBJ got",obj)
-      this.checklist.devicesUsed.push(obj.data)
+      if(typeof obj.data !=="undefined"){
+        this.checklist.devicesUsed.push(obj.data)
+      }
     })
     return await modal.present()
-
+  }
+  async addImplementer(){
+    const modal = await this.modalController.create({
+      component:ImplementerModalComponent,
+      componentProps:{
+        datas:this.users
+      }
+    })
+    modal.onDidDismiss().then((obj:any)=>{
+      console.log("OBJ got",obj)
+      if(typeof obj.data !=="undefined"){
+        this.checklist.users.push(obj.data)
+      }
+    })
+    return await modal.present()
   }
   removeDevice(chip){
     chip.remove()

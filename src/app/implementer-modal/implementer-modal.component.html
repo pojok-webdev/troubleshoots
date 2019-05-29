@@ -1,0 +1,11 @@
+<ion-header>
+  <ion-searchbar [(ngModel)]="searchtext" (ionChange)="reloadData(searchtext)"></ion-searchbar>
+</ion-header>
+<ion-content>
+  <ion-list *ngFor="let data of filtereddatas">
+    <ion-item>
+      <ion-label>{{data.username}}</ion-label>
+      <ion-button slot="end" (click)="chooseItem(data)"><ion-icon name="checkmark"></ion-icon></ion-button>
+    </ion-item>
+  </ion-list>
+</ion-content>

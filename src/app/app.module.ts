@@ -12,10 +12,11 @@ import { TicketMenuComponent } from './ticket-menu/ticket-menu.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DevicesModalComponent } from './devices-modal/devices-modal.component';
 import { FormsModule } from '@angular/forms';
+import { ImplementerModalComponent } from './implementer-modal/implementer-modal.component';
 
 @NgModule({
-  declarations: [AppComponent,TicketMenuComponent,DevicesModalComponent],
-  entryComponents: [TicketMenuComponent,DevicesModalComponent],
+  declarations: [AppComponent,TicketMenuComponent,DevicesModalComponent,ImplementerModalComponent],
+  entryComponents: [TicketMenuComponent,DevicesModalComponent,ImplementerModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule],
   providers: [
     StatusBar,
