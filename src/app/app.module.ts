@@ -13,10 +13,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { DevicesModalComponent } from './devices-modal/devices-modal.component';
 import { FormsModule } from '@angular/forms';
 import { ImplementerModalComponent } from './implementer-modal/implementer-modal.component';
+import { ProblemTypeModalComponent } from './problem-type-modal/problem-type-modal.component';
 
 @NgModule({
-  declarations: [AppComponent,TicketMenuComponent,DevicesModalComponent,ImplementerModalComponent],
-  entryComponents: [TicketMenuComponent,DevicesModalComponent,ImplementerModalComponent],
+  declarations: [AppComponent,TicketMenuComponent,DevicesModalComponent,ImplementerModalComponent,ProblemTypeModalComponent],
+  entryComponents: [TicketMenuComponent,DevicesModalComponent,ImplementerModalComponent,ProblemTypeModalComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule],
   providers: [
     StatusBar,

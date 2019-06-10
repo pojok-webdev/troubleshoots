@@ -11,5 +11,13 @@ obj:Observable<any>
   constructor(private http:HttpClient,private appvar:AppvarService) {}
   gets(callback){
     this.obj = this.http.get(this.appvar.serverport+'ticketproblems')
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
   }
 }

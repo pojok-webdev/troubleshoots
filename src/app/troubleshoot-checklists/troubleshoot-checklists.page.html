@@ -26,7 +26,7 @@
         <ion-item>
           <ion-label>Jenis Masalah</ion-label>
           <ion-input [(ngModel)]="checklist.problemtype" placeholder="Jenis Problem"></ion-input>
-          <ion-button  slot="end"><ion-icon name="more"></ion-icon></ion-button>
+          <ion-button  slot="end" (click)="addProblemType()"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
         <ion-item>
           <ion-label>Perangkat dibawa</ion-label>

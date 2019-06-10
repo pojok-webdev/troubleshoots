@@ -7,6 +7,8 @@ import { DevicesModalComponent } from '../devices-modal/devices-modal.component'
 import { DeviceService } from '../device.service';
 import { ImplementerModalComponent } from '../implementer-modal/implementer-modal.component';
 import { UserService } from '../user.service';
+import { ProblemTypeModalComponent } from '../problem-type-modal/problem-type-modal.component';
+import { TroubleshootcausesService } from '../troubleshootcauses.service';
 
 @Component({
   selector: 'app-troubleshoot-checklists',
@@ -21,6 +23,7 @@ export class TroubleshootChecklistsPage implements OnInit {
   obj
   devices
   users
+  problemTypes
   constructor(
     private checklistmaster: TroubleshootChecklistsService,
     private troubleshoot: TroubleshootService,
@@ -28,7 +31,8 @@ export class TroubleshootChecklistsPage implements OnInit {
     private route: ActivatedRoute,
     private modalController: ModalController,
     private device: DeviceService,
-    private user: UserService
+    private user: UserService,
+    private problemType: TroubleshootcausesService
   ) {
     let that = this
     this.troubleshoot.get({id:this.route.snapshot.params.id},res=>{
@@ -45,6 +49,9 @@ export class TroubleshootChecklistsPage implements OnInit {
       })
       that.user.get(users=>{
         this.users = users
+      })
+      that.problemType.gets(problemTypes=>{
+        this.problemTypes = problemTypes
       })
     })
   }
@@ -98,6 +105,21 @@ export class TroubleshootChecklistsPage implements OnInit {
       component:ImplementerModalComponent,
       componentProps:{
         datas:this.users
+      }
+    })
+    modal.onDidDismiss().then((obj:any)=>{
+      console.log("OBJ got",obj)
+      if(typeof obj.data !=="undefined"){
+        this.checklist.users.push(obj.data)
+      }
+    })
+    return await modal.present()
+  }
+  async addProblemType(){
+    const modal = await this.modalController.create({
+      component:ProblemTypeModalComponent,
+      componentProps:{
+        datas:this.problemTypes
       }
     })
     modal.onDidDismiss().then((obj:any)=>{
