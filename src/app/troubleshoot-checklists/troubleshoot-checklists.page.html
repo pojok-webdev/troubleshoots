@@ -25,7 +25,10 @@
         </ion-item>
         <ion-item>
           <ion-label>Jenis Masalah</ion-label>
-          <ion-input [(ngModel)]="checklist.problemtype" placeholder="Jenis Problem"></ion-input>
+          <ion-chip *ngFor="let problem of checklist.problemTypes;let i=index">
+            <ion-label>{{problem.name}}</ion-label>
+            <ion-icon (click)="remove(checklist.problemTypes,i)" name="close-circle"></ion-icon>
+          </ion-chip>
           <ion-button  slot="end" (click)="addProblemType()"><ion-icon name="more"></ion-icon></ion-button>
         </ion-item>
         <ion-item>

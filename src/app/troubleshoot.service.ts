@@ -24,6 +24,7 @@ export class TroubleshootService {
     })
   }
   execAjax(url,callback){
+    console.log("URL",url)
     this.obj = this.http.get<any>(url)
     this.obj.subscribe(
       data => {

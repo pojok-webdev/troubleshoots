@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TroubleshootcausesService } from '../troubleshootcauses.service';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-problem-type-modal',
@@ -8,12 +9,14 @@ import { TroubleshootcausesService } from '../troubleshootcauses.service';
 })
 export class ProblemTypeModalComponent implements OnInit {
 problems
-  constructor(private causes: TroubleshootcausesService) {
+  constructor(private causes: TroubleshootcausesService,private modal: ModalController) {
     this.causes.gets(causes=>{
       this.problems = causes
     })
   }
-
+  addProblemCause(obj){
+    this.modal.dismiss(obj)
+  }
   ngOnInit() {}
 
 }

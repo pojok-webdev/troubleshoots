@@ -1,5 +1,6 @@
 <ion-list>
   <ion-item *ngFor="let problem of problems">
     <ion-label>{{problem.name}}</ion-label>
+    <ion-button (click)="addProblemCause(problem)"><ion-icon name="checkmark"></ion-icon></ion-button>
   </ion-item>
 </ion-list>

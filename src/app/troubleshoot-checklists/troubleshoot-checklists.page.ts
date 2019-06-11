@@ -18,7 +18,7 @@ import { TroubleshootcausesService } from '../troubleshootcauses.service';
 export class TroubleshootChecklistsPage implements OnInit {
 @ViewChild(IonContent) content: IonContent
   checklist = {
-    problemType:'',devicesBrought:[],devicesUsed:[],users:[],troubleshootchecklistmaster:[]
+    problemType:'',devicesBrought:[],devicesUsed:[],users:[],troubleshootchecklistmaster:[],problemTypes:[]
   }
   obj
   devices
@@ -125,7 +125,7 @@ export class TroubleshootChecklistsPage implements OnInit {
     modal.onDidDismiss().then((obj:any)=>{
       console.log("OBJ got",obj)
       if(typeof obj.data !=="undefined"){
-        this.checklist.users.push(obj.data)
+        this.checklist.problemTypes.push(obj.data)
       }
     })
     return await modal.present()
