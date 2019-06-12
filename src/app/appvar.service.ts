@@ -9,6 +9,6 @@ export class AppvarService {
   port = '2319'
   serverport
   constructor() {
-    this.serverport = 'http://'+this.serversim+':'+this.port+'/'
+    this.serverport = 'http://'+this.server+':'+this.port+'/'
   }
 }

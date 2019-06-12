@@ -31,6 +31,18 @@ export class TroubleshootChecklistsService {
       }
     )    
   }
+  getObj(obj,callback){
+    console.log("Troubleshootchecklist_id",obj)
+    this.obj = this.http.get(this.appvar.serverport+'troubleshootchecklistsgetbyid/'+obj.troubleshootchecklist_id)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )    
+  }
   save(obj,callback){
     this.obj = this.http.post(this.appvar.serverport+'troubleshootchecklistsave',obj)
     this.obj.subscribe(

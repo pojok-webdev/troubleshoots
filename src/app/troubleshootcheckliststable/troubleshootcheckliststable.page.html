@@ -5,7 +5,7 @@
     </ion-fab-button>
   </ion-fab>
   <ion-card *ngFor="let checklist of checklists">
-    <ion-item>
+    <ion-item (click)="editChecklist(checklist)">
       <ion-label>{{checklist.kdticket}}</ion-label>
     </ion-item>
 

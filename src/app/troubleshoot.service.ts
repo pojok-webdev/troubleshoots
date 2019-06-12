@@ -10,6 +10,7 @@ export class TroubleshootService {
   obj : Observable<any>
   constructor(private http: HttpClient, private appvar: AppvarService) {}
   get(obj,callback){
+    console.log("OBJ.ID",obj.id)
     this.execAjax(this.appvar.serverport+'troubleshoot/'+obj.id,callback)
   }
   gets(callback){
@@ -31,7 +32,7 @@ export class TroubleshootService {
         callback(data)
       },
       err => {
-        callback(err)
+        console.log(err)
       }
     )
   }
@@ -42,7 +43,7 @@ export class TroubleshootService {
         callback(data)
       },
       err => {
-        callback(err)
+        console.log(err)
       }
     )
   }

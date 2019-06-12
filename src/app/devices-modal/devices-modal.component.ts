@@ -8,6 +8,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 })
 export class DevicesModalComponent implements OnInit {
 devices = []
+searchText
 filteredDevices = []
   constructor(private modalController: ModalController,private navParam: NavParams) {
     console.log('navParams devices',this.navParam.get('devices'))

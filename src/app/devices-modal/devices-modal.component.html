@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-searchbar [(ngModel)]="searchtext" (ionChange)="reloadDevice(searchtext)"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchText" (ionChange)="reloadDevice(searchText)"></ion-searchbar>
 </ion-header>
 <ion-content>
   <ion-list *ngFor="let device of filteredDevices">

@@ -18,14 +18,19 @@ import { TroubleshootcausesService } from '../troubleshootcauses.service';
 export class TroubleshootChecklistsPage implements OnInit {
 @ViewChild(IonContent) content: IonContent
   checklist = {
-    problemType:'',devicesBrought:[],devicesUsed:[],users:[],troubleshootchecklistmaster:[],problemTypes:[]
+    problemType:'',
+    troubleshootdate:'',
+    devicesBrought:[],
+    devicesUsed:[],
+    users:[],
+    troubleshootchecklistmaster:[],
+    problemTypes:[]
   }
   obj
   devices
   users
   problemTypes
   constructor(
-    private checklistmaster: TroubleshootChecklistsService,
     private troubleshoot: TroubleshootService,
     private checklistservice: TroubleshootChecklistsService,
     private route: ActivatedRoute,
@@ -34,28 +39,49 @@ export class TroubleshootChecklistsPage implements OnInit {
     private user: UserService,
     private problemType: TroubleshootcausesService
   ) {
-    let that = this
-    this.troubleshoot.get({id:this.route.snapshot.params.id},res=>{
-      console.log("Troubelshoot",res)
-      this.obj = res[0]
-      this.checklistmaster.getMaster(res => {
-        this.checklist.troubleshootchecklistmaster = res
-        this.checklist.troubleshootchecklistmaster.push(
-          {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',hasil:'',description:''}
-        )
-      })
-      this.device.gets(devices=>{
-        this.devices = devices
-      })
-      that.user.get(users=>{
-        this.users = users
-      })
-      that.problemType.gets(problemTypes=>{
-        this.problemTypes = problemTypes
-      })
+    this.showPage(
+      this.route.snapshot.params.actionType,
+      this.route.snapshot.params.id
+    )
+  }
+  populateItems(){
+    this.checklistservice.getMaster(res => {
+      this.checklist.troubleshootchecklistmaster = res
+      this.checklist.troubleshootchecklistmaster.push(
+        {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',hasil:'',description:''}
+      )
+    })
+    this.device.gets(devices=>{
+      this.devices = devices
+    })
+    this.user.get(users=>{
+      this.users = users
+    })
+    this.problemType.gets(problemTypes=>{
+      this.problemTypes = problemTypes
     })
   }
-
+  showPage(actionType,id){
+    let that = this
+    console.log("actionType,id",actionType,id)
+    switch(actionType){
+      case 'add':
+      console.log("Add Invoked, ID:",id)
+        this.troubleshoot.get({id:id},res=>{
+          console.log("Troubelshoot",res)
+          this.obj = res[0]
+          this.populateItems()
+        })
+      break
+      case 'edit':
+      console.log("Edit Invoked, ID:",id)
+        this.checklistservice.getObj({troubleshootchecklist_id:id},res=>{
+          this.obj = res[0]
+          this.populateItems()
+        })
+      break
+    }
+  }
   ngOnInit() {
   }
   goToTop(){

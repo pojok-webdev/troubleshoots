@@ -9,6 +9,7 @@ import { NavParams, ModalController } from '@ionic/angular';
 export class ImplementerModalComponent implements OnInit {
 datas
 filtereddatas
+searchText
   constructor(private navpar: NavParams,private modal:ModalController) {
     this.datas = this.navpar.get('datas')
     this.reloadData("")
