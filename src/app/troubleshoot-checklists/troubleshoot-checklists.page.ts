@@ -24,7 +24,8 @@ export class TroubleshootChecklistsPage implements OnInit {
     devicesUsed:[],
     users:[],
     troubleshootchecklistmaster:[],
-    problemTypes:[]
+    problemTypes:[],
+    id:0
   }
   obj
   devices
@@ -39,12 +40,13 @@ export class TroubleshootChecklistsPage implements OnInit {
     private user: UserService,
     private problemType: TroubleshootcausesService
   ) {
+    console.log("Is that U ?")
     this.showPage(
       this.route.snapshot.params.actionType,
       this.route.snapshot.params.id
     )
   }
-  populateItems(){
+  populateMasters(){
     this.checklistservice.getMaster(res => {
       this.checklist.troubleshootchecklistmaster = res
       this.checklist.troubleshootchecklistmaster.push(
@@ -66,21 +68,24 @@ export class TroubleshootChecklistsPage implements OnInit {
     console.log("actionType,id",actionType,id)
     switch(actionType){
       case 'add':
-      console.log("Add Invoked, ID:",id)
+        this.checklist.problemType = 'add'
         this.troubleshoot.get({id:id},res=>{
-          console.log("Troubelshoot",res)
           this.obj = res[0]
-          this.populateItems()
+          this.populateMasters()
         })
       break
       case 'edit':
-      console.log("Edit Invoked, ID:",id)
+        this.checklist.id = id
+        this.checklist.problemType = 'edit'
         this.checklistservice.getObj({troubleshootchecklist_id:id},res=>{
           this.obj = res[0]
-          this.populateItems()
+          this.populateMasters()
         })
       break
     }
+  }
+  populateItems(troubleshootchecklist_id){
+    this.checklistservice.getItems({troubleshootchecklist_id:troubleshootchecklist_id,itemType:'device'},result => {})
   }
   ngOnInit() {
   }
@@ -95,7 +100,6 @@ export class TroubleshootChecklistsPage implements OnInit {
       console.log("Result",result)
     })
   }
-  getDevices(obj){}
   async addDevice(){
     const modal = await this.modalController.create({
       component:DevicesModalComponent,

@@ -9,6 +9,17 @@ import { AppvarService } from './appvar.service';
 export class TroubleshootChecklistsService {
   obj: Observable<any>
   constructor(private http: HttpClient,private appvar:AppvarService) { }
+  getItems(troubleshootchecklist,callback){
+    this.obj = this.http.post(this.appvar.serverport+'troubleshootchecklistitems',troubleshootchecklist)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
+  }
   getMaster(callback){
     this.obj = this.http.get(this.appvar.serverport+'troubleshootchecklistmaster')
     this.obj.subscribe(
@@ -45,6 +56,17 @@ export class TroubleshootChecklistsService {
   }
   save(obj,callback){
     this.obj = this.http.post(this.appvar.serverport+'troubleshootchecklistsave',obj)
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      err => {
+        callback(err)
+      }
+    )
+  }
+  update(obj,callback){
+    this.obj = this.http.post(this.appvar.serverport+'troubleshootchecklistupdate',obj)
     this.obj.subscribe(
       data => {
         callback(data)

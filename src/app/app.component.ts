@@ -27,7 +27,7 @@ export class AppComponent {
     if(path.length>2){
       switch(path[3]){
         case 'troubleshoot-checklists':
-          this.troubleshoot.get({id:path[4]},res=>{
+          this.troubleshoot.get({id:path[5]},res=>{
             this.pageTitle = "Checklist " + res[0].name
           })
         this.pageTitle = 'Checklist TS '
@@ -36,7 +36,7 @@ export class AppComponent {
           this.pageTitle = path[path.length - 1]
         break
         case 'troubleshootcheckliststable':
-        this.troubleshoot.get({id:path[4]},res=>{
+        this.troubleshoot.get({id:path[5]},res=>{
           this.pageTitle = "Tabel Checklist " + res[0].name
         })
         break
