@@ -9,8 +9,49 @@ import { AppvarService } from './appvar.service';
 export class TroubleshootChecklistsService {
   obj: Observable<any>
   constructor(private http: HttpClient,private appvar:AppvarService) { }
-  getItems(troubleshootchecklist,callback){
-    this.obj = this.http.post(this.appvar.serverport+'troubleshootchecklistitems',troubleshootchecklist)
+  getImplementers(troubleshootchecklist,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistimplementers/'+troubleshootchecklist.troubleshootchecklist_id
+    )
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
+  }
+  getDevicebroughts(troubleshootchecklist,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistdevicebroughts/'+troubleshootchecklist.troubleshootchecklist_id
+    )
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
+  }
+  getDeviceuseds(troubleshootchecklist,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistdeviceuseds/'+troubleshootchecklist.troubleshootchecklist_id
+    )
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
+  }
+  getProblems(troubleshootchecklist,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistproblems/'+troubleshootchecklist.troubleshootchecklist_id
+    )
     this.obj.subscribe(
       data => {
         callback(data)
@@ -41,6 +82,58 @@ export class TroubleshootChecklistsService {
         callback(error)
       }
     )    
+  }
+  removeImplementer(obj,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistremoveimplementer/'+obj.troubleshootchecklist_id+'/'+obj.implementer_id
+    )
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
+  }
+  removeDevicebrought(obj,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistremovedevicebrought/'+obj.troubleshootchecklist_id+'/'+obj.device_id
+    )
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
+  }
+  removeDeviceused(obj,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistremovedeviceused/'+obj.troubleshootchecklist_id+'/'+obj.device_id
+    )
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
+  }
+  removeProblem(obj,callback){
+    this.obj = this.http.get(
+      this.appvar.serverport+'troubleshootchecklistremoveproblem/'+obj.troubleshootchecklist_id+'/'+obj.problem_id
+    )
+    this.obj.subscribe(
+      data => {
+        callback(data)
+      },
+      error => {
+        callback(error)
+      }
+    )
   }
   getObj(obj,callback){
     console.log("Troubleshootchecklist_id",obj)

@@ -79,13 +79,26 @@ export class TroubleshootChecklistsPage implements OnInit {
         this.checklist.problemType = 'edit'
         this.checklistservice.getObj({troubleshootchecklist_id:id},res=>{
           this.obj = res[0]
+          this.checklistservice.getImplementers({troubleshootchecklist_id:id},rows => {
+            console.log("rows Impelementers",rows)
+            this.checklist.users = rows
+          })
+          this.checklistservice.getDevicebroughts({troubleshootchecklist_id:id},rows => {
+            console.log("rows Devicebroughts",rows)
+            this.checklist.devicesBrought = rows
+          })
+          this.checklistservice.getDeviceuseds({troubleshootchecklist_id:id},rows => {
+            console.log("rows Deviceuseds",rows)
+            this.checklist.devicesUsed = rows
+          })
+          this.checklistservice.getProblems({troubleshootchecklist_id:id},rows => {
+            console.log("rows Problems",rows)
+            this.checklist.problemTypes = rows
+          })
           this.populateMasters()
         })
       break
     }
-  }
-  populateItems(troubleshootchecklist_id){
-    this.checklistservice.getItems({troubleshootchecklist_id:troubleshootchecklist_id,itemType:'device'},result => {})
   }
   ngOnInit() {
   }
@@ -163,8 +176,33 @@ export class TroubleshootChecklistsPage implements OnInit {
   removeDevice(chip){
     chip.remove()
   }
+  removeProblem(el,i){
+    this.checklistservice.removeProblem(el[i],res => {
+      el.splice(i,1)
+    })
+    console.log("problem removed bro",el[i])
+  }
+  removeImplementer(el,i){
+    this.checklistservice.removeImplementer(el[i],res => {
+      el.splice(i,1)
+    })
+    console.log("implementer removed bro",el[i])
+  }
+  removeDeviceused(el,i){
+    this.checklistservice.removeDeviceused(el[i],res => {
+      el.splice(i,1)
+    })
+    console.log("removed bro",el[i])
+  }
+  removeDevicebrought(el,i){
+    this.checklistservice.removeDevicebrought(el[i],res => {
+      el.splice(i,1)
+    })
+    console.log("removed bro",el[i])
+  }
   remove(el,i){
+    this.checklistservice.removeDevicebrought(el[i],res => {console.log(res)})
+    console.log("removed bro",el[i])
     el.splice(i,1)
-    console.log("removed bro")
   }
 }
