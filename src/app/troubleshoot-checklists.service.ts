@@ -84,6 +84,7 @@ export class TroubleshootChecklistsService {
     )    
   }
   removeImplementer(obj,callback){
+    console.log("OBJ remove Implementer",obj)
     this.obj = this.http.get(
       this.appvar.serverport+'troubleshootchecklistremoveimplementer/'+obj.troubleshootchecklist_id+'/'+obj.implementer_id
     )

@@ -36,7 +36,7 @@ export class AppComponent {
           this.pageTitle = path[path.length - 1]
         break
         case 'troubleshootcheckliststable':
-        this.troubleshoot.get({id:path[5]},res=>{
+        this.troubleshoot.get({id:path[4]},res=>{
           this.pageTitle = "Tabel Checklist " + res[0].name
         })
         break

@@ -109,9 +109,17 @@ export class TroubleshootChecklistsPage implements OnInit {
     console.log("Objs",objs)
     objs.createuser = "puji"
     objs.troubleshoot_id = this.route.snapshot.params.id
-    this.checklistservice.save(objs,result=>{
-      console.log("Result",result)
-    })
+    switch(this.route.snapshot.params.actionType){
+      case 'add':
+        this.checklistservice.save(objs,result=>{
+          console.log("Result",result)
+        })  
+      break
+      case 'edit':
+      this.checklistservice.save(objs,result=>{})
+        console.log("Should be updated")
+      break
+    }
   }
   async addDevice(){
     const modal = await this.modalController.create({
@@ -183,7 +191,9 @@ export class TroubleshootChecklistsPage implements OnInit {
     console.log("problem removed bro",el[i])
   }
   removeImplementer(el,i){
+    console.log("remove Implementer invoked")
     this.checklistservice.removeImplementer(el[i],res => {
+      console.log("RES remove implementer",res)
       el.splice(i,1)
     })
     console.log("implementer removed bro",el[i])
