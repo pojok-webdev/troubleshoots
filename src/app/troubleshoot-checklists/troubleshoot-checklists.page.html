@@ -56,14 +56,14 @@
       
     </ion-card-header>
   </ion-card>
-  <ion-card *ngFor="let obj of checklist.troubleshootchecklistmaster">
+  <ion-card *ngFor="let obj of checklist.items">
     <ion-card-header>
         <ion-label color="primary">{{obj.category}}</ion-label>
     </ion-card-header>
     <ion-card-content>
         <ion-item>
             <ion-label text-wrap>
-                {{ obj.id }}. {{ obj.name }}
+                {{ obj.name }}
             </ion-label>
           </ion-item>
           <ion-item>

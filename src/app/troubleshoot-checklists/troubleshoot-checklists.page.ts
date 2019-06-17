@@ -23,7 +23,8 @@ export class TroubleshootChecklistsPage implements OnInit {
     devicesBrought:[],
     devicesUsed:[],
     users:[],
-    troubleshootchecklistmaster:[],
+    items:[],
+    itemsaveds:[],
     problemTypes:[],
     id:0
   }
@@ -48,8 +49,8 @@ export class TroubleshootChecklistsPage implements OnInit {
   }
   populateMasters(){
     this.checklistservice.getMaster(res => {
-      this.checklist.troubleshootchecklistmaster = res
-      this.checklist.troubleshootchecklistmaster.push(
+      this.checklist.items = res
+      this.checklist.items.push(
         {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',hasil:'',description:''}
       )
     })
@@ -94,6 +95,10 @@ export class TroubleshootChecklistsPage implements OnInit {
           this.checklistservice.getProblems({troubleshootchecklist_id:id},rows => {
             console.log("rows Problems",rows)
             this.checklist.problemTypes = rows
+          })
+          this.checklistservice.getItems({troubleshootchecklist_id:id},rows => {
+            console.log("rows Items",rows)
+            this.checklist.items = rows
           })
           this.populateMasters()
         })
