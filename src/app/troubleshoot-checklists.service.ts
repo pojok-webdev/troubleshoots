@@ -89,6 +89,7 @@ export class TroubleshootChecklistsService {
     this.obj = this.http.get(this.appvar.serverport+'troubleshootchecklistsgetbytroubleshoot/'+obj.troubleshoot_id)
     this.obj.subscribe(
       data => {
+        console.log("getList Data",data)
         callback(data)
       },
       error => {

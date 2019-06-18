@@ -164,8 +164,10 @@ export class TroubleshootChecklistsPage implements OnInit {
       }
     })
     modal.onDidDismiss().then((obj:any)=>{
-      console.log("OBJ got",obj)
+      console.log("users OBJ got",obj)
       if(typeof obj.data !=="undefined"){
+        obj.data.implementer_id = obj.data.id
+        obj.data.troubleshootchecklist_id = this.route.snapshot.params.id
         this.checklist.users.push(obj.data)
       }
     })

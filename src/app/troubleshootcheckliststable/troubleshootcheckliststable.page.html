@@ -4,9 +4,9 @@
       <ion-icon name="add-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <ion-card *ngFor="let checklist of checklists">
+  <ion-card *ngFor="let checklist of checklists;let i=index">
     <ion-item (click)="editChecklist(checklist)">
-      <ion-label>{{checklist.kdticket}}</ion-label>
+      <ion-label>{{i+1}}</ion-label> <ion-label>{{checklist.createdate}}</ion-label>
     </ion-item>
 
   </ion-card>
