@@ -136,7 +136,10 @@ export class TroubleshootChecklistsPage implements OnInit {
     modal.onDidDismiss().then((obj:any)=>{
       console.log("OBJ got",obj)
       if(typeof obj.data !=="undefined"){
-        this.checklist.devicesBrought.push(obj.data)
+        obj.data.troubleshootchecklist_id = this.route.snapshot.params.id
+        if(this.checklist.devicesBrought.includes(obj.data)===false){
+          this.checklist.devicesBrought.push(obj.data)
+        }
       }
     })
     return await modal.present()
@@ -151,10 +154,24 @@ export class TroubleshootChecklistsPage implements OnInit {
     modal.onDidDismiss().then((obj:any)=>{
       console.log("OBJ got",obj)
       if(typeof obj.data !=="undefined"){
-        this.checklist.devicesUsed.push(obj.data)
+        obj.data.troubleshootchecklist_id = this.route.snapshot.params.id
+        if(this.checklist.devicesUsed.includes(obj.data)===false){
+          this.checklist.devicesUsed.push(obj.data)
+        }
       }
     })
     return await modal.present()
+  }
+  checkExist = (objs,obj) => {
+    let tmp = objs.splice(0,1)
+    if((tmp.implementer_id===obj.implementer_id)&&(tmp.troubleshootchecklist_id===obj.troubleshootchecklist_id)){
+      return true
+    }else{
+      if(objs.length>0){
+        this.checkExist(objs,obj)
+      }
+    }
+
   }
   async addImplementer(){
     const modal = await this.modalController.create({
@@ -168,7 +185,19 @@ export class TroubleshootChecklistsPage implements OnInit {
       if(typeof obj.data !=="undefined"){
         obj.data.implementer_id = obj.data.id
         obj.data.troubleshootchecklist_id = this.route.snapshot.params.id
-        this.checklist.users.push(obj.data)
+        let tmp = {
+          id:obj.data.id,
+          implementer_id : obj.data.id,
+          troubleshootchecklist_id:parseInt(this.route.snapshot.params.id),
+          username:obj.data.username
+        }
+        console.log("TMP",tmp)
+        let i = this.checklist.users.indexOf(obj.data)
+        console.log("IIIIII",i)
+        if(i===-1){
+          console.log("H is not exists")
+          this.checklist.users.push(obj.data)
+        }
       }
     })
     return await modal.present()
@@ -183,6 +212,8 @@ export class TroubleshootChecklistsPage implements OnInit {
     modal.onDidDismiss().then((obj:any)=>{
       console.log("OBJ got",obj)
       if(typeof obj.data !=="undefined"){
+        obj.data.troubleshootchecklist_id = this.route.snapshot.params.id
+        obj.data.problem_id = obj.data.id
         this.checklist.problemTypes.push(obj.data)
       }
     })

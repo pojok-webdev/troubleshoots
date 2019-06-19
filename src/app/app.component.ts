@@ -4,6 +4,7 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TroubleshootService } from './troubleshoot.service';
+import { TroubleshootChecklistsService } from './troubleshoot-checklists.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,8 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private troubleshoot: TroubleshootService
+    private troubleshoot: TroubleshootService,
+    private checklist: TroubleshootChecklistsService
   ) {
     this.initializeApp();
     const path: string[] = this.platform.url().split('/');
@@ -36,7 +38,8 @@ export class AppComponent {
           this.pageTitle = path[path.length - 1]
         break
         case 'troubleshootcheckliststable':
-        this.troubleshoot.get({id:path[4]},res=>{
+        this.checklist.getList({troubleshoot_id:path[4]},res=>{
+          console.log("APPCOMPONENT res",res)
           this.pageTitle = "Tabel Checklist " + res[0].name
         })
         break

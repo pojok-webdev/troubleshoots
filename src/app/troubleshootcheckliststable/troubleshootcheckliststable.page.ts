@@ -12,6 +12,7 @@ export class TroubleshootcheckliststablePage implements OnInit {
     private route: ActivatedRoute,
     private checklist: TroubleshootChecklistsService
   ) {
+    console.log("table id",this.route.snapshot.params.id)
     this.checklist.getList({troubleshoot_id:this.route.snapshot.params.id},res => {
       this.checklists = res
     })
