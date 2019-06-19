@@ -12,6 +12,7 @@ import { TroubleshootChecklistsService } from './troubleshoot-checklists.service
 })
 export class AppComponent {
   pageTitle
+  appmenu = {firstmenu:{label:'Halaman Awal',url:'/home',icon:'home'}}
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -30,8 +31,12 @@ export class AppComponent {
       switch(path[3]){
         case 'troubleshoot-checklists':
           this.troubleshoot.get({id:path[5]},res=>{
+            console.log("ID TROUBLESHOOT",res)
             this.pageTitle = "Checklist " + res[0].name
-          })
+            this.appmenu.firstmenu.icon = "arrow-round-back"
+            this.appmenu.firstmenu.label = "Kembali ke " + res[0].name
+            this.appmenu.firstmenu.url = "/troubleshootcheckliststable/"+res[0].id
+            })
         this.pageTitle = 'Checklist TS '
         break
         case 'troubleshoots':
@@ -40,8 +45,18 @@ export class AppComponent {
         case 'troubleshootcheckliststable':
         this.checklist.getList({troubleshoot_id:path[4]},res=>{
           console.log("APPCOMPONENT res",res)
-          this.pageTitle = "Tabel Checklist " + res[0].name
+          if(res.count>0){
+            this.pageTitle = "Tabel Checklist " + res[0].name
+          }
+          this.appmenu.firstmenu.label = "Halaman Awal"
+          this.appmenu.firstmenu.icon = "home"
+          this.appmenu.firstmenu.url = "/"
         })
+        break
+        case 'home':
+          this.appmenu.firstmenu.label = "Halaman Awal"
+          this.appmenu.firstmenu.icon = "home"
+          this.appmenu.firstmenu.url = "/"
         break
       }
     }

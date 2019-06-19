@@ -41,7 +41,6 @@ export class TroubleshootChecklistsPage implements OnInit {
     private user: UserService,
     private problemType: TroubleshootcausesService
   ) {
-    console.log("Is that U ?")
     this.showPage(
       this.route.snapshot.params.actionType,
       this.route.snapshot.params.id
@@ -121,8 +120,9 @@ export class TroubleshootChecklistsPage implements OnInit {
         })  
       break
       case 'edit':
-      this.checklistservice.save(objs,result=>{})
-        console.log("Should be updated")
+      this.checklistservice.save(objs,result=>{
+        console.log("Should be updated",result)
+      })
       break
     }
   }
@@ -163,15 +163,8 @@ export class TroubleshootChecklistsPage implements OnInit {
     return await modal.present()
   }
   checkExist = (objs,obj) => {
-    let tmp = objs.splice(0,1)
-    if((tmp.implementer_id===obj.implementer_id)&&(tmp.troubleshootchecklist_id===obj.troubleshootchecklist_id)){
-      return true
-    }else{
-      if(objs.length>0){
-        this.checkExist(objs,obj)
-      }
-    }
-
+    objs.find(obj)
+    
   }
   async addImplementer(){
     const modal = await this.modalController.create({
