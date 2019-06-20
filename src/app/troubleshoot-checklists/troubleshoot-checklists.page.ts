@@ -50,7 +50,7 @@ export class TroubleshootChecklistsPage implements OnInit {
     this.checklistservice.getMaster(res => {
       this.checklist.items = res
       this.checklist.items.push(
-        {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',hasil:'',description:''}
+        {category:'Lain-lain',name:'nama cheklist',planning:'',target:'',result:'',description:''}
       )
     })
     this.device.gets(devices=>{
@@ -99,7 +99,7 @@ export class TroubleshootChecklistsPage implements OnInit {
             console.log("rows Items",rows)
             this.checklist.items = rows
           })
-          this.populateMasters()
+          //this.populateMasters()
         })
       break
     }
