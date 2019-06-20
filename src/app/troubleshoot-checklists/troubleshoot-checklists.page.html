@@ -68,18 +68,18 @@
           </ion-item>
           <ion-item>
             <ion-checkbox slot="start"></ion-checkbox>
-            <ion-input [(ngModel)]="obj.planning" placeholder="Planning"></ion-input>
+            <ion-input [(ngModel)]="obj.planning" placeholder="Planning" [value]="obj.planning"></ion-input>
           </ion-item>
           <ion-item>
             <ion-checkbox slot="start"></ion-checkbox>
-            <ion-input [(ngModel)]="obj.result" placeholder="Hasil"></ion-input>  
+            <ion-input [(ngModel)]="obj.result" placeholder="Hasil" [value]="obj.result"></ion-input>  
           </ion-item>
           <ion-item>
             <ion-checkbox slot="start"></ion-checkbox>
-            <ion-input [(ngModel)]="obj.target" placeholder="Target (Menit)"></ion-input>  
+            <ion-input [(ngModel)]="obj.target" placeholder="Target (Menit)" [value]="obj.target"></ion-input>  
           </ion-item>
           <ion-item>
-            <ion-textarea [(ngModel)]="obj.description" placeholder="Keterangan"></ion-textarea>
+            <ion-textarea [(ngModel)]="obj.description" placeholder="Keterangan" [value]="obj.description"></ion-textarea>
           </ion-item>      
     </ion-card-content>
   </ion-card>
